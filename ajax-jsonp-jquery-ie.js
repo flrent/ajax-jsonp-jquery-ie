@@ -1,5 +1,4 @@
-define(["jquery"],
-    function ($) {
+(function () {
         /**
         /* You need to require this helper,
         /* then to call it with the following arguments,
@@ -11,6 +10,7 @@ define(["jquery"],
         /* if you have questions, issues : @flrent
         /*
         ***/
+        var $ = this.jQuery;
         $.support.cors = true;
         var jsonpAjaxIEsafe = function(type, url, data, successCallback, errorCallback) {
             if ($.browser.msie && window.XDomainRequest) {
@@ -45,4 +45,4 @@ define(["jquery"],
         };
         return jsonpAjaxIEsafe;
     }
-);
+).call(this);
