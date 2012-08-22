@@ -1,16 +1,17 @@
 (function () {
-        /**
-        /* You need to require this helper,
-        /* then to call it with the following arguments,
-        /* a type ("get", ou "post"),
-        /* a url to call, a data object for POST request (send null for GET request),
-        /* a successCallback function and an errorCallback function
-        /*
-        /*
-        /* if you have questions, issues : @flrent
-        /*
-        ***/
+        //**
+        //* You need to require this helper,
+        //* then to call it with the following arguments,
+        //* a type ("get", ou "post"),
+        //* a url to call, a data object for POST request (send null for GET request),
+        //* a successCallback function and an errorCallback function
+        //*
+        //*
+        //* if you have questions, issues : @flrent
+        //*
+        //**
         var $ = this.jQuery;
+        var TYPE_GET = "get";
         $.support.cors = true;
         var jsonpAjaxIEsafe = function(type, url, data, successCallback, errorCallback) {
             if ($.browser.msie && window.XDomainRequest) {
@@ -25,8 +26,8 @@
                         successCallback(JSON.parse(xdr.responseText));
                     };
 
-                if(type=="get") {
-                    xdr.open("get", url);
+                if(type==TYPE_GET) {
+                    xdr.open(TYPE_GET, url);
                     xdr.send();
                 }
                 else {
@@ -35,9 +36,9 @@
                 }
             } else {
                 $.ajax({
-                    type: type == "get" ? "GET" : "POST",
+                    type: type == TYPE_GET ? "GET" : "POST",
                     url: url,
-                    data: type == "get" ? null : data,
+                    data: type == TYPE_GET ? null : data,
                     dataType: 'json',
                     error:errorCallback
                 }).done(successCallback);
