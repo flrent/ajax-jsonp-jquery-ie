@@ -1,5 +1,5 @@
-define(["App","jquery"],
-    function (App,$) {
+define(["jquery"],
+    function ($) {
         /**
         /* You need to require this helper,
         /* then to call it with the following arguments,
