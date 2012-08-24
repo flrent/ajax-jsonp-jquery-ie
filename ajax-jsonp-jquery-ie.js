@@ -17,22 +17,32 @@
             if ($.browser.msie && window.XDomainRequest) {
                 // Use Microsoft XDR
                 var xdr = new XDomainRequest();
+                    
                     xdr.onerror = errorCallback;
+                    xdr.timeout = 5000;
+
+                    xdr.ontimeout = function () {};
+                    xdr.onprogress = function () {};
                     xdr.onload = function() {
-                        // XDomainRequest doesn't provide responseXml, so if you need it:
                         var dom = new ActiveXObject("Microsoft.XMLDOM");
                         dom.async = false;
                         dom.loadXML(xdr.responseText);
                         successCallback(JSON.parse(xdr.responseText));
                     };
 
-                if(type==TYPE_GET) {
-                    xdr.open(TYPE_GET, url);
-                    xdr.send();
+                if(type=="get") {
+                    xdr.open("get", url);
+
+                    setTimeout(function () {
+                        xdr.send();
+                    }, 200);
                 }
                 else {
                     xdr.open("post", url);
-                    xdr.send(data);
+
+                    setTimeout(function () {
+                        xdr.send(JSON.stringify(data)); // you have to handle stringified data on the server
+                    }, 200);
                 }
             } else {
                 $.ajax({
