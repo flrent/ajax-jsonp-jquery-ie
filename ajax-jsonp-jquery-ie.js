@@ -30,7 +30,7 @@
                         successCallback(JSON.parse(xdr.responseText));
                     };
 
-                if(type=="get") {
+                if(type==TYPE_GET) {
                     xdr.open("get", url);
 
                     setTimeout(function () {
